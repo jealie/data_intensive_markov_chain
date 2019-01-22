@@ -46,8 +46,11 @@ source("transition_quebec_estimate_database.R")
 RawInv.data <- mdb.get('BD_PEP.mdb') # loads the MDB database
 Ref.species <- read.csv("REF_SPECIES_SUCCESSIONAL_QUEBEC.CSV", header=T)  ## loads Jenkins and shade tolerance species-dependend coefficients
 
-TREES <- RawInv.data$ETUDARBR # get the individual trees info from database table ETUDARBR
-TREES <- find_years(TREES, RawInv.data$INFOGEN) # parse for the years from database table INFOGEN
+#TREES <- RawInv.data$ETUDARBR # get the individual trees info from database table ETUDARBR
+#TREES <- find_years(TREES, RawInv.data$INFOGEN) # parse for the years from database table INFOGEN
+
+TREES <- find_years(RawInv.data$DENDRO_ARBRES_ETUDES, RawInv.data$PLACETTE_MES) # parse for the years from database table INFOGEN
+
 
 CHARACTERISTICS_FULL <- as.data.frame(get.summaries(TREES, RawInv.data))  # this computes all the stand characteristics
 
@@ -77,7 +80,8 @@ latex(cor(scale(CHARACTERISTICS_FULL[ which((CHARACTERISTICS$YEAR>=1970) & (CHAR
 
 # visual output of the correlation matrix
 par(mfrow = c(1,1), oma = c(0,0,0,0), mar=c(0,0,0,0))
-corrgram(CHARACTERISTICS[,c(3,4,5,6,7,8)], labels=c("Biomass","Basal Area","Ext. Diversity","Int. Diversity","Shade Index","Average Age"), order=TRUE, lower.panel=panel.conf, upper.panel=panel.pie, text.panel=panel.txt,cex=1.5)#,cex.cor=1.5)
+corrgram(CHARACTERISTICS_FULL[,c(3,4,5,6,7,8)], 
+         order=TRUE, lower.panel=panel.conf, upper.panel=panel.pie, text.panel=panel.txt,cex=1.5)#,cex.cor=1.5)
 dopdf('correlations_visu')
 
 

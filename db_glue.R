@@ -13,7 +13,7 @@ find_years=function(etudarbr,infogen)
   n <- nrow(etudarbr)
   for (j in 1:n) {
     setTxtProgressBar(pb, j / n)
-    i = which(infogen$ID.PEP.MES==etudarbr$ID.PEP.MES[[j]])
+    i = which(infogen$ID.PE.MES==etudarbr$ID.PE.MES[[j]])
     if (length(i) > 1) {
       print("duplicates entries...")
       dates[j] = NA
@@ -29,11 +29,11 @@ find_years=function(etudarbr,infogen)
     if (as.numeric(yy) < 14) {
       # we are in the 20xx years
       dates[j] = as.numeric(paste0('20', yy))
-      ids[j] = as.numeric(paste0('20', yy, as.character(infogen$ID.PEP[[i]])))
+      ids[j] = as.numeric(paste0('20', yy, as.character(infogen$ID.PE[[i]])))
     } else {
       # we are in the 19xx years
       dates[j] = as.numeric(paste0('19', yy))
-      ids[j] = as.numeric(paste0('19', yy, as.character(infogen$ID.PEP[[i]])))
+      ids[j] = as.numeric(paste0('19', yy, as.character(infogen$ID.PE[[i]])))
     }
   }
   result = cbind(etudarbr,INVYR=dates, UNIQUEPLOTID=ids)
@@ -62,8 +62,8 @@ get.summaries = function(trees,Raw,xy=Ref.species)
   y <- trees[which(trees$ETAT == 10),c(which(colnames(trees)=="UNIQUEPLOTID"),
                             which(colnames(trees)=="INVYR"),
                             which(colnames(trees)=="ESSENCE"),
-                            which(colnames(trees)=="DHPMM"),
-                            which(colnames(trees)=="HAUTEUR"),
+                            which(colnames(trees)=="DHP"),
+                            which(colnames(trees)=="HAUT.ARBRE"),
                             which(colnames(trees)=="AGE")
   )]
   colnames(y) <- c("UNIQUEPLOTID","INVYR","SPCD_QUEBEC","DIA","ACTUALHT","AGE")
