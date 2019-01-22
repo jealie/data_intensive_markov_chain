@@ -7,6 +7,12 @@ This repository contains code to reproduce the methodology established in the pa
 The code performs the transition matrix estimation of the Quebec forest inventory database. The main code is located in `script.R`, which calls helper functions in `db_glue.R` and `estimate_gibbs.R`.
 
 
+A note about database versions
+===
+
+A prior version of Quebec forest inventory database was used to estimate the transition matrices and reproduce the results of the 2015 paper ("Placettes-Échantillons Permanentes", formerly found in file "BD_PEP.mdb" which was available upon request). In early 2019 I converted the code to handle the current version of this database which is now distributed online at [this url](https://www.donneesquebec.ca/recherche/fr/dataset/placettes-echantillons-permanentes-1970-a-aujourd-hui/resource/ccf8d0d7-85fe-49b0-a965-e914b2395fb7) (see also the [maaster page of the Quebec open data portal](https://mffp.gouv.qc.ca/le-ministere/acces-aux-donnees-gratuites/)).
+
+
 Minimal example on synthetic data
 ===
 
